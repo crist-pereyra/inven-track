@@ -29,7 +29,7 @@ export function SaveButton({ action, title, bgColor, icon, url }: Props) {
   );
 }
 const Container = styled.button<ContainerProps>`
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;

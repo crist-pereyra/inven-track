@@ -3,6 +3,7 @@ import { AuthContextProvider, Dark, Light } from '.';
 import { router } from './router/router';
 import styled, { ThemeProvider } from 'styled-components';
 import { createContext, useState } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const ThemeContext = createContext<any>(null);
 function App() {
@@ -16,6 +17,7 @@ function App() {
             {/* <Container> */}
             <RouterProvider router={router} />
             {/* </Container> */}
+            <ReactQueryDevtools initialIsOpen={false} />
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>

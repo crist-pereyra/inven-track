@@ -1,6 +1,14 @@
 import styled from 'styled-components';
+import { SaveButton } from '../molecules/SaveButton';
+import { useAuthStore } from '../../store/auth.store';
 export const HomeTemplate = () => {
-  return <Container>Home</Container>;
+  const signOut = useAuthStore((state: any) => state.signOut);
+  return (
+    <Container>
+      Home
+      <SaveButton title='Logout' bgColor='#fff' action={signOut} />
+    </Container>
+  );
 };
 const Container = styled.div`
   display: flex;

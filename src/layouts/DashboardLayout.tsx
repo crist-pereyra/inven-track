@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Device } from '../styles/breakpoints';
 import { useState } from 'react';
 import { Sidebar } from '../components/organisms/sidebar/Sidebar';
 import { SidebarMobile } from '../components/organisms/SidebarMobile';
+import { UserAuth } from '../context/AuthContext';
 
 export const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { user } = UserAuth();
+  if (!user) return <Navigate replace to='/auth/login' />;
   return (
     <>
       <Container className={isSidebarOpen ? 'active' : ''}>

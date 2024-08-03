@@ -7,14 +7,16 @@ interface Props {
   children: React.ReactNode;
 }
 export const AuthContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState<any | null>([]);
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event: string, session: any) => {
         console.log(event, session);
-        async (event: string, session: any) => {
-          setUser(session?.user ?? null);
-        };
+        if (session?.user == null) {
+          setUser(null);
+        } else {
+          setUser(session?.user);
+        }
       }
     );
     return () => {
