@@ -66,8 +66,8 @@ const Container = styled.div`
       color: #000;
     }
     .content-btn {
-      position: relative;
-      margin-left: -8px;
+      display: flex;
+      justify-content: center;
     }
   }
 `;

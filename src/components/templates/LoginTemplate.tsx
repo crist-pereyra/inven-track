@@ -93,6 +93,7 @@ export function LoginTemplate() {
                 action={() => setState(!state)}
                 title='Create Account'
                 bgColor='#ffffff'
+                type='button'
               />
             </ContainerBtn>
           </form>

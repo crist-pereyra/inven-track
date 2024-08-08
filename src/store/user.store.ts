@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from '../supabase/supabase.config';
-import { insertUser } from '../supabase/users';
+import { getUser, insertUser } from '../supabase/users';
 
 export const useUserStore = create((set, get) => ({
   insertAdminUser: async (params: any) => {
@@ -16,5 +16,11 @@ export const useUserStore = create((set, get) => ({
       user_type: 'admin',
     });
     return user;
+  },
+  userId: 0,
+  getUser: async () => {
+    const response = await getUser();
+    set({ userId: response?.id });
+    return response;
   },
 }));

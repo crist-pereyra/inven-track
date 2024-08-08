@@ -3,19 +3,19 @@ import { v } from '../styles/variables';
 
 export const userMenu = [
   {
-    text: 'Mi perfil',
-    icono: <v.userIcon />,
-    tipo: 'miperfil',
+    text: 'Profile',
+    icon: <v.userIcon />,
+    type: 'profile',
   },
   {
-    text: 'Configuracion',
-    icono: <v.settingsIcon />,
-    tipo: 'configuracion',
+    text: 'Settings',
+    icon: <v.settingsIcon />,
+    type: 'settings',
   },
   {
-    text: 'Cerrar sesión',
-    icono: <v.logoutIcon />,
-    tipo: 'cerrarsesion',
+    text: 'Logout',
+    icon: <v.logoutIcon />,
+    type: 'logout',
   },
 ];
 
@@ -26,7 +26,7 @@ export const links = [
     to: '/dashboard',
   },
   {
-    label: 'Kardex',
+    label: 'Stock Card',
     icon: <v.categoriesIcon />,
     to: '/dashboard/kardex',
   },

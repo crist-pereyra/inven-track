@@ -7,6 +7,7 @@ interface Props {
   bgColor: string;
   icon?: JSX.Element;
   url?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 interface ContainerProps
   extends FastOmit<
@@ -15,9 +16,16 @@ interface ContainerProps
   > {
   $bgColor: string;
 }
-export function SaveButton({ action, title, bgColor, icon, url }: Props) {
+export function SaveButton({
+  action,
+  title,
+  bgColor,
+  icon,
+  url,
+  type = 'submit',
+}: Props) {
   return (
-    <Container type='submit' $bgColor={bgColor}>
+    <Container type={type} $bgColor={bgColor}>
       <Icon>{icon}</Icon>
 
       <span className='btn' onClick={action}>

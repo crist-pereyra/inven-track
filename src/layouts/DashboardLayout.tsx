@@ -5,11 +5,37 @@ import { useState } from 'react';
 import { Sidebar } from '../components/organisms/sidebar/Sidebar';
 import { SidebarMobile } from '../components/organisms/SidebarMobile';
 import { UserAuth } from '../context/AuthContext';
+import { useQuery } from '@tanstack/react-query';
+import { useUserStore } from '../store/user.store';
+import { SpinnerLoader } from '../components/molecules/SpinnerLoader';
+import { Error } from '../components/molecules/Error';
+import { useCompanyStore } from '../store/company.store';
 
 export const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user } = UserAuth();
+  const getUser = useUserStore((state: any) => state.getUser);
+  const userId = useUserStore((state: any) => state.userId);
+  const getCompany = useCompanyStore((state: any) => state.getCompany);
+
+  const {
+    data: userData,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: ['get user'],
+    queryFn: getUser,
+  });
+
+  const { data: companyData } = useQuery({
+    queryKey: ['get company'],
+    queryFn: () => getCompany(userId),
+    enabled: !!userData,
+  });
+
   if (!user) return <Navigate replace to='/auth/login' />;
+  if (isFetching) return <SpinnerLoader />;
+
   return (
     <>
       <Container className={isSidebarOpen ? 'active' : ''}>
@@ -23,7 +49,7 @@ export const DashboardLayout = () => {
           <SidebarMobile />
         </section>
         <section className='content-main'>
-          <Outlet />
+          {error ? <Error message={error.message} /> : <Outlet />}
         </section>
       </Container>
     </>
